@@ -39,7 +39,7 @@ def crear_tabla():
 
 def borrar_tabla():
     conexion = ConexionDB()
-
+ 
     #borrar una tabla
     sql= 'DROP TABLE contratados '
     try:
@@ -55,7 +55,9 @@ def borrar_tabla():
 
 # modelo de empleados 
 class Contratado:
-    def __init__ (self, nombre , cuil , nacimiento, monto, modificacion, duracion, area_de_trabajo, funcion,domicilio,telefono, mail, otros_trabajos):
+    def __init__ (self, nombre , cuil , nacimiento, monto, modificacion, 
+                  duracion, area_de_trabajo, funcion,domicilio,telefono,
+                  mail, otros_trabajos):
         self.id_contratado= None
         self.nombre = nombre
         self.cuil = cuil
@@ -76,7 +78,8 @@ class Contratado:
 def guadar(contratado):
     conexion = ConexionDB()
 
-    sql= f"""INSERT INTO contratados (nombre , cuil , nacimiento, monto, modificacion,duracion,area_de_trabajo, funcion,domicilio,telefono, mail, otros_trabajos)  
+    sql= f"""INSERT INTO contratados (nombre , cuil , nacimiento, monto, modificacion,
+            duracion,area_de_trabajo, funcion,domicilio,telefono, mail, otros_trabajos)  
     VALUES('{contratado.nombre}', '{contratado.cuil}','{contratado.nacimiento}', '{contratado.monto}', '{contratado.modificacion}','{contratado.duracion}','{contratado.area_de_trabajo}','{contratado.funcion}','{contratado.domicilio}','{contratado.telefono}','{contratado.mail}','{contratado.otros_trabajos}')"""
     
     try:
@@ -134,7 +137,7 @@ def editar(contratado, id_contratado):
 
 def eliminar(id_contratado):
     conexion = ConexionDB()
-    sql = f'DELETE FROM contratado WHERE id_contratados = {id_contratado}'
+    sql = f'DELETE FROM contratados WHERE id_contratado = {id_contratado}'
 
     try:
         conexion.cursor.execute(sql)
@@ -145,11 +148,30 @@ def eliminar(id_contratado):
         messagebox.showerror(titulo, mensaje)
 
 
-#acá comence a crear la funcionalidad de buscar, pero no funciona 
-# def busca_nombre(self,nombre):
-#         conexion = self.conexion.cursor()
-#         sql = "SELECT * FROM productos WHERE NOMBRE = {}".format(nombre)
-#         conexion.execute(sql)
-#         nombreX = conexion.fetchall()
-#         conexion.close()     
-#         return nombreX 
+#acá comence a crear la funcionalidad de buscar en la tabla , pero no funciona 
+def buscar(contratado , id_contratado):
+    conexion = ConexionDB()
+    
+    sql = f"""SELECT * FROM productos SET nombre='{contratado.nombre}' , 
+    cuil='{contratado.cuil}' , 
+    nacimiento='{contratado.nacimiento}', 
+    monto='{contratado.monto}',
+    modificacion= '{contratado.modificacion}', 
+    duracion='{contratado.duracion}', 
+    area_de_trabajo= '{contratado.area_de_trabajo}', 
+    funcion= '{contratado.funcion}',
+    domicilio= '{contratado.domicilio}',
+    telefono='{contratado.telefono}', 
+    mail='{contratado.mail}',
+    otros_trabajos= '{contratado.otros_trabajos}'
+    WHERE id_contratado = {id_contratado}"""
+
+    try: 
+        conexion.cursor.fetchall(sql)
+        conexion.cerrar()
+
+
+    except:
+        titulo = 'Busqueda de contrtado'
+        mensaje = 'No se ha podido encontarar este registro'
+        messagebox.showerror(titulo, mensaje)
