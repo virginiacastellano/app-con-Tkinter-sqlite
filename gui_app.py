@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import HORIZONTAL, VERTICAL, ttk, messagebox
-from contratado_dao import Contratado, borrar_tabla, busca_nombre, buscar, crear_tabla, editar, eliminar, guadar, listar
+from contratado_dao import Contratado, borrar_tabla, buscar, crear_tabla, editar, eliminar, guadar, listar
 
 
 def barra_menu(root):
@@ -156,7 +156,7 @@ class Frame(tk.Frame):
         self.boton_guardar.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#070BFA', cursor='hand2', activebackground= '#F5F9F5' )
         self.boton_guardar.grid(row=12, column=1, padx=5, pady=5)
         #este es el boton guardar, que esta creado, pero no funciona 
-        self.boton_buscar= tk.Button(self, text= "Buscar", command= busca_nombre)
+        self.boton_buscar= tk.Button(self, text= "Buscar", command= buscar)
         self.boton_buscar.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#EE7F08', cursor='hand2', activebackground= '#F5F9F5' )
         self.boton_buscar.grid(row=12, column=2, padx=5, pady=5)
 
@@ -403,51 +403,51 @@ class Frame(tk.Frame):
     
             
         # acá se deberia realizar la funcionalidad de botón buscar que se deberia poner el cuil del contratado y que te devuelva todo los campos 
-    def busca(self):
-        try:
-            self.id_contratado = self.tabla.item(self.tabla.selection())['text']
-            self.nombre_contratado = self.tabla.item(
-                self.tabla.selection())['values'][0]
-            self.cuil_contratado = self.tabla.item(
-                self.tabla.selection())['values'][1]
-            self.nacimiento_contratado = self.tabla.item(
-                self.tabla.selection())['values'][2]
-            self.monto_contratado = self.tabla.item(
-                self.tabla.selection())['values'][3]
-            self.modificacion_contratado = self.tabla.item(
-                self.tabla.selection())['values'][4]
-            self.duracion_contratado = self.tabla.item(
-                self.tabla.selection())['values'][5]
-            self.area_de_trabajo_contratado = self.tabla.item(
-                self.tabla.selection())['values'][6]
-            self.funcion_contratado = self.tabla.item(
-                self.tabla.selection())['values'][7]
-            self.domicilio_contratado = self.tabla.item(
-                self.tabla.selection())['values'][8]
-            self.telefono_contratado = self.tabla.item(
-                self.tabla.selection())['values'][9]
-            self.mail_contratado = self.tabla.item(
-                self.tabla.selection())['values'][10]
-            self.otros_trabajos_contratado = self.tabla.item(
-                self.tabla.selection())['values'][11]
+    # def busca(self):
+    #     try:
+    #         self.id_contratado = self.tabla.item(self.tabla.selection())['text']
+    #         self.nombre_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][0]
+    #         self.cuil_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][1]
+    #         self.nacimiento_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][2]
+    #         self.monto_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][3]
+    #         self.modificacion_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][4]
+    #         self.duracion_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][5]
+    #         self.area_de_trabajo_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][6]
+    #         self.funcion_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][7]
+    #         self.domicilio_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][8]
+    #         self.telefono_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][9]
+    #         self.mail_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][10]
+    #         self.otros_trabajos_contratado = self.tabla.item(
+    #             self.tabla.selection())['values'][11]
 
-            self.habilitar_campos()
+    #         self.habilitar_campos()
 
-            self.entry_nombre.insert(0, self.nombre_contratado)
-            self.entry_cuil.insert(0, self.Cuil_contratado)
-            self.entry_nacimiento.insert(0, self.nacimiento_pelicula)
-            self.entry_monto.insert(0, self.monto_contratado)
-            self.entry_modificacion.insert(0, self.modificacion_contratado)
-            self.entry_duracion.insert(0, self.duracion_contratado)
-            self.entry_area_de_trabajo.insert(0, self.area_de_trabajo_contratado)
-            self.entry_funcion.insert(0, self.funcion_contratado)
-            self.entry_domicilio.insert(0, self.domicilio_contratado)
-            self.entry_telefono.insert(0, self.telefono_contratado)
-            self.entry_mail.insert(0, self.mail_contratado)
-            self.entry_otros_trabajos.insert(0, self.otros_trabajos_contratado)
+    #         self.entry_nombre.insert(0, self.nombre_contratado)
+    #         self.entry_cuil.insert(0, self.Cuil_contratado)
+    #         self.entry_nacimiento.insert(0, self.nacimiento_pelicula)
+    #         self.entry_monto.insert(0, self.monto_contratado)
+    #         self.entry_modificacion.insert(0, self.modificacion_contratado)
+    #         self.entry_duracion.insert(0, self.duracion_contratado)
+    #         self.entry_area_de_trabajo.insert(0, self.area_de_trabajo_contratado)
+    #         self.entry_funcion.insert(0, self.funcion_contratado)
+    #         self.entry_domicilio.insert(0, self.domicilio_contratado)
+    #         self.entry_telefono.insert(0, self.telefono_contratado)
+    #         self.entry_mail.insert(0, self.mail_contratado)
+    #         self.entry_otros_trabajos.insert(0, self.otros_trabajos_contratado)
 
 
-        except:
-            titulo = 'Busqueda de contrtado'
-            mensaje = 'No se ha podido encontarar este registro'
-            messagebox.showerror(titulo, mensaje)
+    #     except:
+    #         titulo = 'Busqueda de contrtado'
+    #         mensaje = 'No se ha podido encontarar este registro'
+    #         messagebox.showerror(titulo, mensaje)
