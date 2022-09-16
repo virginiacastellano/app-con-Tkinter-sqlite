@@ -407,7 +407,7 @@ class Frame(tk.Frame):
             # self.mail_contratado = self.tabla.item( self.tabla())['values'][10]
             # self.otros_trabajos_contratado = self.tabla.item(self.tabla())['values'][11]
             
-            self.id_encontrado = 1
+         
 
 
     
