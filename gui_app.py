@@ -1,7 +1,7 @@
+from sqlite3 import Cursor, Row
 import tkinter as tk
 from tkinter import HORIZONTAL, VERTICAL, ttk, messagebox
-from contratado_dao import Contratado, borrar_tabla, buscar, crear_tabla, editar, eliminar, guadar, listar
-
+from contratado_dao import ConexionDB, Contratado, borrar_tabla, buscar, crear_tabla, editar, eliminar, guadar, listar
 
 def barra_menu(root):
     barra_menu = tk.Menu(root)
@@ -141,11 +141,6 @@ class Frame(tk.Frame):
         self.entry_otros_trabajos.grid(row= 11, column = 1, padx=5, pady=5,columnspan= 2)
 
 
-        # self.mi_buscar=tk.StringVar()
-        # self.entry_buscar = tk.Entry(self, textvariable= self.mi_buscar)
-        # self.entry_buscar.config(width= 70,font= ('Arial', 12))
-        # self.entry_buscar.grid(row= 12, column = 1, padx=5, pady=5,columnspan= 2)
-
 
       #Botones
         self.boton_nuevo= tk.Button(self, text= "Nuevo", command= self.habilitar_campos)
@@ -252,7 +247,7 @@ class Frame(tk.Frame):
         
         else:
            editar(self.contratado, self.id_contratado)
-           buscar(self.contratado,self.id_contratado)
+           #buscar(self.contratado,self.id_contratado)
            
            
         
@@ -390,20 +385,4 @@ class Frame(tk.Frame):
             
         # acá se deberia realizar la funcionalidad de botón buscar que se deberia poner el cuil del contratado y que te devuelva todo los campos 
     def buscar_datos(self):
-       
-        try:
-            
-            mi_nombre = self.buscar.get()
-            mi_nombre = str("'" + mi_nombre + "'")
-            mi_nombre = self.tabla.busca(mi_nombre)
-            self.tabla.delete(*self.tabla.get_children())
-            i = -1
-            for dato in mi_nombre:
-                i= i+1                       
-                self.tabla.insert('',i, text = mi_nombre[i][1:2], values=mi_nombre[i][2:6])
-        except:
-            titulo = 'Busqueda de contrtado'
-            mensaje = 'No se ha podido encontarar este registro'
-            messagebox.showerror(titulo, mensaje)
-         
-    
+       pass

@@ -1,6 +1,17 @@
 
-from conexcion_db import ConexionDB
 from tkinter import  messagebox
+import sqlite3
+
+#esta esla conexión de la base de datos 
+class ConexionDB:
+    def __init__(self):
+        self.base_datos= 'database/contratos.db'
+        self.conexion= sqlite3.connect(self.base_datos)
+        self.cursor= self.conexion.cursor()
+
+    def cerrar(self):
+        self.conexion.commit()
+        self.conexion.close()
 
 
 def crear_tabla():
@@ -150,22 +161,5 @@ def eliminar(id_contratado):
 
 #acá comence a crear la funcionalidad de buscar en la tabla , pero no funciona 
   
-def buscar(id_contratado ):
-    conexion = ConexionDB()
-    sql = f'SELECT * FROM contratados WHERE id_contratado = {id_contratado}'
-    # sql = f"""SELECT * FROM contratados GET nombre='{contratado.nombre}' , 
-   
-    try: 
-        
-        conexion.cursor.execute(sql)
-        nombreX = conexion.cursor.fetchall()
-        conexion.cerrar 
-        return nombreX 
-        
-       
-
-
-    except:
-        titulo = 'Edición de datos'
-        mensaje = 'No se ha podido encontrar este registro'
-        messagebox.showerror(titulo, mensaje)
+def buscar(self, contratado ):
+   pass
