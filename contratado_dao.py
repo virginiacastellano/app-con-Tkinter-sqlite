@@ -148,7 +148,7 @@ def eliminar(id_contratado):
         messagebox.showerror(titulo, mensaje)
 
 
-#acá comence a crear la funcionalidad de buscar en la tabla , pero no funciona 
+#acá esta la llamada a la base de datos para que busque 
 def buscar(contratado , id_contratado):
     conexion = ConexionDB()
     
