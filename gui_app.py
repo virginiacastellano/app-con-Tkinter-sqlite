@@ -21,7 +21,7 @@ class Frame(tk.Frame):
         super().__init__(root, width=500, height=500)
         self.root= root
         self.pack()
-        # self.config( bg='#B4F6B3')
+        self.config( bg='#EEE7BC')
         self.id_contratado= None
 
         self.campos_contratos()
@@ -58,19 +58,19 @@ class Frame(tk.Frame):
         self.label_area_de_trabajo.config(font= ('Arial', 12, 'bold'))
         self.label_area_de_trabajo.grid(row= 6, column = 0 , padx=5, pady=5)
 
-        self.label_funcion = tk.Label(self, text= 'funcion: ')
+        self.label_funcion = tk.Label(self, text= 'Función: ')
         self.label_funcion.config(font= ('Arial', 12, 'bold'))
         self.label_funcion.grid(row= 7, column = 0 , padx=5, pady=5 )
 
-        self.label_domicilio = tk.Label(self, text= 'domicilio: ')
+        self.label_domicilio = tk.Label(self, text= 'Domicilio: ')
         self.label_domicilio.config(font= ('Arial', 12, 'bold'))
         self.label_domicilio.grid(row= 8, column = 0, padx=5, pady=5)
 
-        self.label_telefono = tk.Label(self, text= 'telefono: ')
+        self.label_telefono = tk.Label(self, text= 'Teléfono: ')
         self.label_telefono.config(font= ('Arial', 12, 'bold'))
         self.label_telefono.grid(row= 9, column = 0, padx=4, pady=5)
 
-        self.label_mail = tk.Label(self, text= 'mail: ')
+        self.label_mail = tk.Label(self, text= 'Mail: ')
         self.label_mail.config(font= ('Arial', 12, 'bold'))
         self.label_mail.grid(row= 10, column = 0, padx=5, pady=5)
 
@@ -137,7 +137,7 @@ class Frame(tk.Frame):
 
         self.mi_otros_trabajos= tk.StringVar()
         self.entry_otros_trabajos = tk.Entry(self, textvariable= self.mi_otros_trabajos)
-        self.entry_otros_trabajos.config(width= 70,font= ('Arial', 12))
+        self.entry_otros_trabajos.config(width= 70,font= ('Verdana ', 12))
         self.entry_otros_trabajos.grid(row= 11, column = 1, padx=5, pady=5,columnspan= 2)
 
 
@@ -149,23 +149,20 @@ class Frame(tk.Frame):
 
       #Botones
         self.boton_nuevo= tk.Button(self, text= "Nuevo", command= self.habilitar_campos)
-        self.boton_nuevo.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#1CAA23', cursor='hand2', activebackground= '#F5F9F5' )
+        self.boton_nuevo.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#2EF11E', cursor='hand2', activebackground= '#F5F9F5' )
         self.boton_nuevo.grid(row=12, column=0, padx=5, pady=5 )
 
         self.boton_guardar= tk.Button(self, text= "Guardar", command= self.guardar_datos)
-        self.boton_guardar.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#070BFA', cursor='hand2', activebackground= '#F5F9F5' )
+        self.boton_guardar.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#688BD1', cursor='hand2', activebackground= '#F5F9F5' )
         self.boton_guardar.grid(row=12, column=1, padx=5, pady=5)
         #este es el boton guardar, que esta creado, pero no funciona 
-        self.boton_buscar= tk.Button(self, text= "Buscar", command= buscar)
-        self.boton_buscar.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#EE7F08', cursor='hand2', activebackground= '#F5F9F5' )
+        self.boton_buscar= tk.Button(self, text= "Buscar", command= self.buscar_datos)
+        self.boton_buscar.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#688BD1', cursor='hand2', activebackground= '#F5F9F5' )
         self.boton_buscar.grid(row=12, column=2, padx=5, pady=5)
 
         self.boton_cancelar= tk.Button(self, text= "Cancelar", command=self.deshabilitar_campos)
         self.boton_cancelar.config(width=20, font= ('Arial', 12, 'bold'), fg= '#FFFFFF', bg='#FA1007', cursor='hand2', activebackground= '#F5F9F5' )
         self.boton_cancelar.grid(row=12, column=3, padx=5, pady=5)
-
-
-       
 
 
     def habilitar_campos(self):
@@ -253,9 +250,10 @@ class Frame(tk.Frame):
         if self.id_contratado== None:
             guadar(self.contratado)
         
-       
         else:
            editar(self.contratado, self.id_contratado)
+           buscar(self.contratado,self.id_contratado)
+           
            
         
         self.tabla_contratado()
@@ -331,7 +329,7 @@ class Frame(tk.Frame):
 
         self.boton_editar= tk.Button(self, text= "Editar", command= self.editar_datos)
         self.boton_editar.config(width=20, font= ('Arial', 12, 'bold'),
-                                 fg= '#FFFFFF', bg='#1CAA23', cursor='hand2', activebackground= '#F5F9F5' )
+                                 fg= '#FFFFFF', bg='#688BD1', cursor='hand2', activebackground= '#F5F9F5' )
         self.boton_editar.grid(row=12, column=4, padx=5, pady=5)
 
 
@@ -340,39 +338,27 @@ class Frame(tk.Frame):
                                    bg='#FA1007', cursor='hand2', activebackground= '#F5F9F5' )
         self.boton_eliminar.grid(row=11, column=4, padx=5, pady=5)
 
-    def editar_datos (self):
+    def editar_datos(self):
         try:
             self.id_contratado = self.tabla.item(self.tabla.selection())['text']
-            self.nombre_contratado = self.tabla.item(
-                self.tabla.selection())['values'][0]
-            self.cuil_contratado = self.tabla.item(
-                self.tabla.selection())['values'][1]
-            self.nacimiento_contratado = self.tabla.item(
-                self.tabla.selection())['values'][2]
-            self.monto_contratado = self.tabla.item(
-                self.tabla.selection())['values'][3]
-            self.modificacion_contratado = self.tabla.item(
-                self.tabla.selection())['values'][4]
-            self.duracion_contratado = self.tabla.item(
-                self.tabla.selection())['values'][5]
-            self.area_de_trabajo_contratado = self.tabla.item(
-                self.tabla.selection())['values'][6]
-            self.funcion_contratado = self.tabla.item(
-                self.tabla.selection())['values'][7]
-            self.domicilio_contratado = self.tabla.item(
-                self.tabla.selection())['values'][8]
-            self.telefono_contratado = self.tabla.item(
-                self.tabla.selection())['values'][9]
-            self.mail_contratado = self.tabla.item(
-                self.tabla.selection())['values'][10]
-            self.otros_trabajos_contratado = self.tabla.item(
-                self.tabla.selection())['values'][11]
+            self.nombre_contratado = self.tabla.item(self.tabla.selection())['values'][0]
+            self.cuil_contratado = self.tabla.item(self.tabla.selection())['values'][1]
+            self.nacimiento_contratado = self.tabla.item(self.tabla.selection())['values'][2]
+            self.monto_contratado = self.tabla.item(self.tabla.selection())['values'][3]
+            self.modificacion_contratado = self.tabla.item(self.tabla.selection())['values'][4]
+            self.duracion_contratado = self.tabla.item(self.tabla.selection())['values'][5]
+            self.area_de_trabajo_contratado = self.tabla.item(self.tabla.selection())['values'][6]
+            self.funcion_contratado = self.tabla.item( self.tabla.selection())['values'][7]
+            self.domicilio_contratado = self.tabla.item(self.tabla.selection())['values'][8]
+            self.telefono_contratado = self.tabla.item(self.tabla.selection())['values'][9]
+            self.mail_contratado = self.tabla.item( self.tabla.selection())['values'][10]
+            self.otros_trabajos_contratado = self.tabla.item(self.tabla.selection())['values'][11]
 
             self.habilitar_campos()
 
             self.entry_nombre.insert(0, self.nombre_contratado)
-            self.entry_cuil.insert(0, self.Cuil_contratado)
-            self.entry_nacimiento.insert(0, self.nacimiento_pelicula)
+            self.entry_cuil.insert(0, self.cuil_contratado)
+            self.entry_nacimiento.insert(0, self.nacimiento_contratado)
             self.entry_monto.insert(0, self.monto_contratado)
             self.entry_modificacion.insert(0, self.modificacion_contratado)
             self.entry_duracion.insert(0, self.duracion_contratado)
@@ -386,7 +372,7 @@ class Frame(tk.Frame):
 
         except:
             titulo = 'Edición de datos'
-            mensaje = 'No ha seleccionado nigun registro'
+            mensaje = 'No se ha podido editar este registro'
             messagebox.showerror(titulo, mensaje)
 
     def eliminar_datos(self):
@@ -403,51 +389,31 @@ class Frame(tk.Frame):
     
             
         # acá se deberia realizar la funcionalidad de botón buscar que se deberia poner el cuil del contratado y que te devuelva todo los campos 
-    # def busca(self):
-    #     try:
-    #         self.id_contratado = self.tabla.item(self.tabla.selection())['text']
-    #         self.nombre_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][0]
-    #         self.cuil_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][1]
-    #         self.nacimiento_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][2]
-    #         self.monto_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][3]
-    #         self.modificacion_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][4]
-    #         self.duracion_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][5]
-    #         self.area_de_trabajo_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][6]
-    #         self.funcion_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][7]
-    #         self.domicilio_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][8]
-    #         self.telefono_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][9]
-    #         self.mail_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][10]
-    #         self.otros_trabajos_contratado = self.tabla.item(
-    #             self.tabla.selection())['values'][11]
-
-    #         self.habilitar_campos()
-
-    #         self.entry_nombre.insert(0, self.nombre_contratado)
-    #         self.entry_cuil.insert(0, self.Cuil_contratado)
-    #         self.entry_nacimiento.insert(0, self.nacimiento_pelicula)
-    #         self.entry_monto.insert(0, self.monto_contratado)
-    #         self.entry_modificacion.insert(0, self.modificacion_contratado)
-    #         self.entry_duracion.insert(0, self.duracion_contratado)
-    #         self.entry_area_de_trabajo.insert(0, self.area_de_trabajo_contratado)
-    #         self.entry_funcion.insert(0, self.funcion_contratado)
-    #         self.entry_domicilio.insert(0, self.domicilio_contratado)
-    #         self.entry_telefono.insert(0, self.telefono_contratado)
-    #         self.entry_mail.insert(0, self.mail_contratado)
-    #         self.entry_otros_trabajos.insert(0, self.otros_trabajos_contratado)
+    def buscar_datos(self):
+        print ("si funciono")
+        try:
+            
+            # self.id_contratado = self.tabla.item(self.tabla())['text']
+            # self.nombre_contratado = self.tabla.item(self.tabla())['values'][0]
+            # self.cuil_contratado = self.tabla.item(self.tabla())['values'][1]
+            # self.nacimiento_contratado = self.tabla.item(self.tabla())['values'][2]
+            # self.monto_contratado = self.tabla.item(self.tabla())['values'][3]
+            # self.modificacion_contratado = self.tabla.item(self.tabla())['values'][4]
+            # self.duracion_contratado = self.tabla.item(self.tabla())['values'][5]
+            # self.area_de_trabajo_contratado = self.tabla.item(self.tabla())['values'][6]
+            # self.funcion_contratado = self.tabla.item( self.tabla())['values'][7]
+            # self.domicilio_contratado = self.tabla.item(self.tabla())['values'][8]
+            # self.telefono_contratado = self.tabla.item(self.tabla())['values'][9]
+            # self.mail_contratado = self.tabla.item( self.tabla())['values'][10]
+            # self.otros_trabajos_contratado = self.tabla.item(self.tabla())['values'][11]
+            
+            self.id_encontrado = 1
 
 
-    #     except:
-    #         titulo = 'Busqueda de contrtado'
-    #         mensaje = 'No se ha podido encontarar este registro'
-    #         messagebox.showerror(titulo, mensaje)
+    
+        except:
+            titulo = 'Busqueda de contrtado'
+            mensaje = 'No se ha podido encontarar este registro'
+            messagebox.showerror(titulo, mensaje)
+         
+    
