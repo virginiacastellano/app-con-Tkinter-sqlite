@@ -390,27 +390,17 @@ class Frame(tk.Frame):
             
         # acá se deberia realizar la funcionalidad de botón buscar que se deberia poner el cuil del contratado y que te devuelva todo los campos 
     def buscar_datos(self):
-        print ("si funciono")
+       
         try:
             
-            # self.id_contratado = self.tabla.item(self.tabla())['text']
-            # self.nombre_contratado = self.tabla.item(self.tabla())['values'][0]
-            # self.cuil_contratado = self.tabla.item(self.tabla())['values'][1]
-            # self.nacimiento_contratado = self.tabla.item(self.tabla())['values'][2]
-            # self.monto_contratado = self.tabla.item(self.tabla())['values'][3]
-            # self.modificacion_contratado = self.tabla.item(self.tabla())['values'][4]
-            # self.duracion_contratado = self.tabla.item(self.tabla())['values'][5]
-            # self.area_de_trabajo_contratado = self.tabla.item(self.tabla())['values'][6]
-            # self.funcion_contratado = self.tabla.item( self.tabla())['values'][7]
-            # self.domicilio_contratado = self.tabla.item(self.tabla())['values'][8]
-            # self.telefono_contratado = self.tabla.item(self.tabla())['values'][9]
-            # self.mail_contratado = self.tabla.item( self.tabla())['values'][10]
-            # self.otros_trabajos_contratado = self.tabla.item(self.tabla())['values'][11]
-            
-         
-
-
-    
+            mi_nombre = self.buscar.get()
+            mi_nombre = str("'" + mi_nombre + "'")
+            mi_nombre = self.tabla.busca(mi_nombre)
+            self.tabla.delete(*self.tabla.get_children())
+            i = -1
+            for dato in mi_nombre:
+                i= i+1                       
+                self.tabla.insert('',i, text = mi_nombre[i][1:2], values=mi_nombre[i][2:6])
         except:
             titulo = 'Busqueda de contrtado'
             mensaje = 'No se ha podido encontarar este registro'

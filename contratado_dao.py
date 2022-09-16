@@ -1,3 +1,4 @@
+
 from conexcion_db import ConexionDB
 from tkinter import  messagebox
 
@@ -110,7 +111,7 @@ def listar():
 def editar(contratado, id_contratado):
     conexion = ConexionDB()
 
-    sql = f"""UPDATE contratados 
+    sql = f""" UPDATE contratados 
     SET nombre='{contratado.nombre}' , 
     cuil='{contratado.cuil}' , 
     nacimiento='{contratado.nacimiento}', 
@@ -123,12 +124,11 @@ def editar(contratado, id_contratado):
     telefono='{contratado.telefono}', 
     mail='{contratado.mail}',
     otros_trabajos= '{contratado.otros_trabajos}'
-    WHERE id_contratado = {id_contratado}"""
+    WHERE id_contratado = {id_contratado} """
 
     try: 
         conexion.cursor.execute(sql)
         conexion.cerrar()
-  
 
     except:
         titulo = 'Edición de datos'
@@ -148,30 +148,24 @@ def eliminar(id_contratado):
         messagebox.showerror(titulo, mensaje)
 
 
-#acá esta la llamada a la base de datos para que busque 
-def buscar(contratado , id_contratado):
+#acá comence a crear la funcionalidad de buscar en la tabla , pero no funciona 
+  
+def buscar(id_contratado ):
     conexion = ConexionDB()
-    
-    sql = f"""SELECT * FROM productos SET nombre='{contratado.nombre}' , 
-    cuil='{contratado.cuil}' , 
-    nacimiento='{contratado.nacimiento}', 
-    monto='{contratado.monto}',
-    modificacion= '{contratado.modificacion}', 
-    duracion='{contratado.duracion}', 
-    area_de_trabajo= '{contratado.area_de_trabajo}', 
-    funcion= '{contratado.funcion}',
-    domicilio= '{contratado.domicilio}',
-    telefono='{contratado.telefono}', 
-    mail='{contratado.mail}',
-    otros_trabajos= '{contratado.otros_trabajos}'
-    WHERE id_contratado = {id_contratado}"""
-
+    sql = f'SELECT * FROM contratados WHERE id_contratado = {id_contratado}'
+    # sql = f"""SELECT * FROM contratados GET nombre='{contratado.nombre}' , 
+   
     try: 
-        conexion.cursor.fetchall(sql)
-        conexion.cerrar()
+        
+        conexion.cursor.execute(sql)
+        nombreX = conexion.cursor.fetchall()
+        conexion.cerrar 
+        return nombreX 
+        
+       
 
 
     except:
-        titulo = 'Busqueda de contrtado'
-        mensaje = 'No se ha podido encontarar este registro'
+        titulo = 'Edición de datos'
+        mensaje = 'No se ha podido encontrar este registro'
         messagebox.showerror(titulo, mensaje)
